@@ -346,7 +346,7 @@ function addRole(){
 function addEmployee(){
     const queryAll = `SELECT employee.id, employee.first_name, employee.last_name, roles.id, roles.title, CONCAT(m.first_name, " ", m.last_name) 'manager'
     FROM  employee
-    INNER JOIN roles ON (roles.id = employee.role_id)
+    RIGHT JOIN roles ON (roles.id = employee.role_id)
     LEFT JOIN employee m 
 	ON (employee.manager_id = m.id)
     ORDER BY manager ASC;`
@@ -404,7 +404,6 @@ function addEmployee(){
                     }
                 });
                 
-                console.log(managerId);
                 resAll.forEach(manager => {
                     if (answer.manager === manager.manager) {
                         const [first_name, last_name] = manager.manager.split(" ");
@@ -432,13 +431,14 @@ function addEmployee(){
                         const managerId = null;
                         const query = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
                         VALUES ("${answer.first_name}", "${answer.last_name}", ${roleId}, ${managerId});`;
+                        console.log(query);
                         connection.query(query, err => {
                             if (err) throw err;
+                            console.log(query);
                             viewEmployees(); 
                         });
                     }
                 });
-
                 
             });
                

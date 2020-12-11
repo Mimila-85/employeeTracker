@@ -344,7 +344,7 @@ function addRole(){
 }
 
 function addEmployee(){
-    const queryAll = `SELECT employee.id, employee.first_name, employee.last_name, roles.id, roles.title, CONCAT(m.first_name, " ", m.last_name) 'manager'
+    const queryAll = `SELECT employee.id, employee.first_name, employee.last_name, roles.id, roles.title, employee.manager_id,CONCAT(m.first_name, " ", m.last_name) 'manager'
     FROM  employee
     RIGHT JOIN roles ON (roles.id = employee.role_id)
     LEFT JOIN employee m 
@@ -396,52 +396,40 @@ function addEmployee(){
                     }
                 }
             ])
-            .then(answer => {
-                let roleId
-                resAll.forEach(role => {
-                    if (answer.role === role.title) {
-                        roleId = role.id;
-                    }
-                });
+    .then(answer => {
+        let roleId
+        resAll.forEach(role => {
+            if (answer.role === role.title) {
+                roleId = role.id;
+            }
+        });
+        
+        let managerId;
+        
+
+        resAll.forEach(manager => {
+            
+            if (answer.manager === manager.manager) {
+                managerId = manager.manager_id;
+            }
+
+            else if (answer.manager === "Not Applicable"){
+                managerId = null;
+            }
+            
+        });
+        
+        const query = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
+                VALUES ("${answer.first_name}", "${answer.last_name}", ${roleId}, ${managerId});`;
                 
-                resAll.forEach(manager => {
-                    if (answer.manager === manager.manager) {
-                        const [first_name, last_name] = manager.manager.split(" ");
-                        const query = `SELECT id, first_name, last_name
-                        FROM employee
-                        WHERE first_name="${first_name.trim()}" AND last_name="${last_name.trim()}";`
-                        
-                        connection.query(query, (err, res) =>{
-                            if (err) throw err;
-                            res.forEach(manager => {
-                                const managerId = manager.id;
-                                const query = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
-                                VALUES ("${answer.first_name}", "${answer.last_name}", ${roleId}, ${managerId});`;
-                                connection.query(query, err => {
-                                    if (err) throw err;
-                                    viewEmployees(); 
-                                });
-                                
-                            })
-                            
-                                                     
-                        })
-                    }
-                    else if (answer.manager === "Not Applicable"){
-                        const managerId = null;
-                        const query = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
-                        VALUES ("${answer.first_name}", "${answer.last_name}", ${roleId}, ${managerId});`;
-                        console.log(query);
-                        connection.query(query, err => {
-                            if (err) throw err;
-                            console.log(query);
-                            viewEmployees(); 
-                        });
-                    }
+                connection.query(query, err => {
+                    if (err) throw err;
+                    
+                    viewEmployees(); 
                 });
-                
-            });
-               
+        
+    });
+    
     });
 }
 

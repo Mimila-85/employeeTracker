@@ -33,29 +33,29 @@ It will install `inquirer`, `mysql`, `dotenv`, and `console-table-printer`.
 
 To start, run on your command line `npm start`, this will prompt a series of questions to ask what you would like to do. The options include:
 * View All Departments
-	This will print your **department** table in the command line.
+	* This will print your **department** table in the command line.
  * View All Roles
-	This will print your **roles** table in the command line.
+	* This will print your **roles** table in the command line.
 * View All Employees
-	This will print an **employee** table which will list the employee id, first name, last name, title, department name, salary, and manager name if applicable.
+	* This will print an **employee** table which will list the employee id, first name, last name, title, department name, salary, and manager name if applicable.
 * View All Employees by Department
-	This will print an **employee** table which will list the employee id, first name, last name, title, department name, salary, and manager name if applicable for a specific department.
+	* This will print an **employee** table which will list the employee id, first name, last name, title, department name, salary, and manager name if applicable for a specific department.
 * View All Employees by Manager
-	This will print an **employee** table which will list the employee id, first name, last name, title, department name, salary, and manager name if applicable for a specific manager.
+	* This will print an **employee** table which will list the employee id, first name, last name, title, department name, salary, and manager name if applicable for a specific manager.
 * Add Department
-	This will prompt a question to enter the name of the department you would like to create. It will verify if the department already exist before creating it, if it already exists it will not create the department, and it will notify the user that the department already exist.
+	* This will prompt a question to enter the name of the department you would like to create. It will verify if the department already exist before creating it, if it already exists it will not create the department, and it will notify the user that the department already exist.
 * Add Role
-	This will prompt three questions, one to enter the title for this role, the salary, and it will list the current departments to select to which this role belongs to. It will verify if the role already exists before creating it, if it already exists it will not create the role, and it will notify the user that the role already exists. It also verifies if user entered a number for the salary.
+	* This will prompt three questions, one to enter the title for this role, the salary, and it will list the current departments to select to which this role belongs to. It will verify if the role already exists before creating it, if it already exists it will not create the role, and it will notify the user that the role already exists. It also verifies if user entered a number for the salary.
 * Add Employee
-	This will prompt fours questions, one to enter the employee first name, last name, it will list the roles available to select from, as well as a list of managers if applicable for the employee.
+	* This will prompt fours questions, one to enter the employee first name, last name, it will list the roles available to select from, as well as a list of managers if applicable for the employee.
 * Update Employee Role
-This will prompt three questions, one to enter the employee first name, the employee last name that you would like to update the role, and it will list the current roles to select the new department for that employee.
+	* This will prompt three questions, one to enter the employee first name, the employee last name that you would like to update the role, and it will list the current roles to select the new department for that employee.
 * Exit
-	This will exit the command line application.
+	* This will exit the command line application.
 
 Click on the gif below to watch a demo video for this application.
 
-[![Employee Tracker](https:...gif)](https://youtu.be/...)
+[![Employee Tracker](https://github.com/Mimila-85/employeeTracker/blob/master/assets/images/employeeTrackerDemo.gif)](https://youtu.be/QChVNUY0VtA)
 
 ## License
 
